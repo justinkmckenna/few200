@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="add(focus)">
+  <div class="form-group">
+    <label for="for">For</label>
+    <input name="for" formControlName="for" class="form-control" autofocus #focus>
+    <div class="alert alert-danger" *ngIf="for.invalid && (for.touched || for.dirty)">
+      <p *ngIf="for.errors?.required">Required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="holiday">Holiday</label>
+    <input name="holiday" formControlName="holiday" class="form-control">
+    <div class="alert alert-danger" *ngIf="holiday.invalid && (holiday.touched || holiday.dirty)">
+      <p *ngIf="holiday.errors?.required">Required</p>
+      <p *ngIf="holiday.errors?.minlength">Min Length is {{ holiday.errors?.minlength.requiredLength }}</p>
+      <p *ngIf="holiday.errors?.maxlength">Max Length is {{ holiday.errors?.maxlength.requiredLength }}</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="suggestions">Suggestions</label>
+    <input name="suggestions" formControlName="suggestions" class="form-control">
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Add</button>
+</form>
