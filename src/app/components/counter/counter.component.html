@@ -1,1 +1,7 @@
-<p>counter works!</p>
+<div>
+  <button (click)="decrement()" class="btn btn-sm btn-primary">-</button>
+  <span>{{ count$ | async }}</span>
+  <button (click)="increment()" class="btn btn-sm btn-primary">+</button>
+</div>
+<button [disabled]="resetDisabled$ | async" (click)="reset()" class="btn btn-danger">Reset</button>
+<app-count-by></app-count-by>
