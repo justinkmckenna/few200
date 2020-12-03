@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CounterComponent } from './components/counter/counter.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { GiftGivingComponent } from './components/gift-giving/gift-giving.component';
+import { GiftFeatureComponent } from './features/gift-feature/gift-feature.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'gifts', component: GiftGivingComponent },
+  { path: 'gifts', component: GiftFeatureComponent },
   { path: 'counter', component: CounterComponent },
   { path: '**', component: DashboardComponent }
 ];

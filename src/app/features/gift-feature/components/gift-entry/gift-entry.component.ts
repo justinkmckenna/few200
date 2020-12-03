@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { GiftItem } from 'src/app/models';
+import { Store } from '@ngrx/store';
+import { giftAdded } from '../../actions/gift.actions';
+import { GiftFeatureState } from '../../reducers';
 
 @Component({
   selector: 'app-gift-entry',
@@ -9,9 +11,7 @@ import { GiftItem } from 'src/app/models';
 })
 export class GiftEntryComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder) {}
-
-  @Output() itemAdded = new EventEmitter<GiftItem>();
+  constructor(private formBuilder: FormBuilder, private store: Store<GiftFeatureState>) {}
 
   form!: FormGroup;
   get for(): AbstractControl { return this.form.get('for') as AbstractControl; }
@@ -31,8 +31,8 @@ export class GiftEntryComponent implements OnInit {
       console.log('Form Invalid.');
       return;
     }
-    console.log(this.form.value);
-    this.itemAdded.emit(this.form.value);
+    const gift = this.form.value;
+    this.store.dispatch(giftAdded({gift}));
     this.form.reset();
     focus.focus();
   }

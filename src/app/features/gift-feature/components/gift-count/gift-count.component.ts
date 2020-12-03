@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GiftService } from 'src/app/services/gift.service';
 
 @Component({
   selector: 'app-gift-count',
@@ -10,12 +9,12 @@ import { GiftService } from 'src/app/services/gift.service';
 })
 export class GiftCountComponent implements OnInit {
 
-  constructor(private giftService: GiftService) { }
+  constructor() { }
 
   count$!: Observable<number>;
 
   ngOnInit(): void {
-    this.count$ = this.giftService.getGiftCount();
+    //this.count$ = this.giftService.getGiftCount();
   }
 
 }
