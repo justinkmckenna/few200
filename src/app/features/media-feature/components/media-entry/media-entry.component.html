@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="add(focus)">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input name="title" formControlName="title" class="form-control" autofocus #focus>
+    <div class="alert alert-danger" *ngIf="title.invalid && (title.touched || title.dirty)">
+      <p *ngIf="title.errors?.required">Required</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="format">Format</label>
+    <input name="format" formControlName="format" class="form-control">
+    <div class="alert alert-danger" *ngIf="format.invalid && (format.touched || format.dirty)">
+      <p *ngIf="format.errors?.required">Required</p>
+    </div>
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Add</button>
+</form>

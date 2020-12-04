@@ -1,0 +1,45 @@
+<button [disabled]="view==='all'" (click)="toggleView('all')" class="btn btn-primary">Show All</button>
+<button [disabled]="view==='available'" (click)="toggleView('available')" class="btn btn-primary">Show Available</button>
+<button [disabled]="view==='loanedOut'" (click)="toggleView('loanedOut')" class="btn btn-primary">Show Loaned Out</button>
+
+<div *ngIf="view === 'all'">
+  <h4>All Media</h4>
+  <div class="card" *ngFor="let item of mediaItems$ | async">
+    <div class="card-body">
+      <h5 class="card-title">{{item.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{item.format}}</h6>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" [checked]="item.loanedOut" (click)="toggleLoanedOut(item)">
+        <label class="form-check-label" for="exampleCheck1">Loaned Out</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="view === 'available'">
+  <h4>Available Media</h4>
+  <div class="card" *ngFor="let item of mediaItems$ | async">
+    <div class="card-body" *ngIf="!item.loanedOut">
+      <h5 class="card-title">{{item.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{item.format}}</h6>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" [checked]="item.loanedOut" (click)="toggleLoanedOut(item)">
+        <label class="form-check-label" for="exampleCheck1">Loaned Out</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="view === 'loanedOut'">
+  <h4>Loaned Out Media</h4>
+  <div class="card" *ngFor="let item of mediaItems$ | async">
+    <div class="card-body" *ngIf="item.loanedOut">
+      <h5 class="card-title">{{item.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{item.format}}</h6>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" [checked]="item.loanedOut" (click)="toggleLoanedOut(item)">
+        <label class="form-check-label" for="exampleCheck1">Loaned Out</label>
+      </div>
+    </div>
+  </div>
+</div>
